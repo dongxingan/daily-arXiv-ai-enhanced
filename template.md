@@ -24,8 +24,46 @@ By default, this action will automatically run every day
 You can modify it in `.github/workflows/run.yml`
 9. If you wish to modify the content in `README.md`, do not directly edit README.md. You should edit `template.md`.
 
+### For Developers (Local Environment)
+
+We recommend using `uv` for a fast and reliable local development setup.
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Chi-hong22/daily-arXiv-ai-enhanced.git
+   cd daily-arXiv-ai-enhanced
+   ```
+2. **Install `uv` and setup the environment**:
+   ```bash
+   # Install uv (if you haven't already)
+   pip install uv
+   # Create and activate virtual environment
+   uv venv
+   # On Windows: .venv\Scripts\Activate.ps1
+   # On macOS/Linux: source .venv/bin/activate
+   ```
+3. **Install dependencies**:
+   ```bash
+   uv pip install -e .
+   ```
+4. **Configure environment variables**:
+   Create a `.env` file in the root directory and add your `OPENAI_API_KEY`.
+
+For more detailed instructions, please refer to the [**Development Environment Configuration Document**](@Docs/DevEnvConfig.md).
+
+# 📚 Project Documentation
+
+This project has a complete set of internal documents, located in the `@Docs` directory, to help you better understand the design and details of the project.
+
+- **`@Docs/DevEnvConfig.md`**: How to set up the local development environment from scratch.
+- **`@Docs/Feature/`**: Detailed design and implementation rules for each core function.
+- **`@Docs/ChangeLog.md`**: Project iteration and version change log.
+- **`@Docs/FeatureMap.md`**: Visualized feature map and data flow diagram.
+- **`@Docs/TechDebt.md`**: Known technical issues and optimization suggestions.
+
 # To-do list
 - [ ]  Replace markdown with GitHub pages front-end.
+- [ ]  (From `@Docs/TechDebt.md`) Refactor the arXiv spider to use the official API instead of web scraping for better stability.
 
 # Content
 {readme_content}

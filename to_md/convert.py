@@ -16,12 +16,12 @@ if __name__ == "__main__":
         else:
             return len(preference)
 
-    with open(args.data, "r") as f:
+    with open(args.data, "r", encoding='utf-8') as f:
         for line in f:
             data.append(json.loads(line))
 
     categories = set([item["categories"][0] for item in data])
-    template = open("paper_template.md", "r").read()
+    template = open("paper_template.md", "r", encoding='utf-8').read()
     categories = sorted(categories, key=rank)
     cnt = {cate: 0 for cate in categories}
     for item in data:
@@ -55,5 +55,6 @@ if __name__ == "__main__":
                 for item in data if item["categories"][0] == cate
             ]
         )
-    with open(args.data.split('_')[0] + '.md', "w") as f:
+    with open(args.data.split('_')[0] + '.md', "w", encoding='utf-8') as f:
         f.write(markdown)
+        

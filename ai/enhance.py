@@ -15,8 +15,8 @@ from langchain.prompts import (
 from structure import Structure
 if os.path.exists('.env'):
     dotenv.load_dotenv()
-template = open("template.txt", "r").read()
-system = open("system.txt", "r").read()
+template = open("template.txt", "r", encoding='utf-8').read()
+system = open("system.txt", "r", encoding='utf-8').read()
 
 def parse_args():
     """解析命令行参数"""
@@ -30,7 +30,7 @@ def main():
     language = os.environ.get("LANGUAGE", 'Chinese')
 
     data = []
-    with open(args.data, "r") as f:
+    with open(args.data, "r", encoding='utf-8') as f:
         for line in f:
             data.append(json.loads(line))
 
@@ -70,8 +70,8 @@ def main():
                  "result": "Error",
                  "conclusion": "Error"
             }
-        with open(args.data.replace('.jsonl', f'_AI_enhanced_{language}.jsonl'), "a") as f:
-            f.write(json.dumps(d) + "\n")
+        with open(args.data.replace('.jsonl', f'_AI_enhanced_{language}.jsonl'), "a", encoding='utf-8') as f:
+            f.write(json.dumps(d, ensure_ascii=False) + "\n")
 
         print(f"Finished {idx+1}/{len(data)}", file=sys.stderr)
 

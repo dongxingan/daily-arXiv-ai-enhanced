@@ -1,5 +1,6 @@
 # Cursor
 .cursor/
+Instructions.md
 # Python-generated files
 __pycache__/
 *.py[oc]
@@ -11,5 +12,6 @@ wheels/
 # Virtual environments
 .venv
 ai/.env
+.env
 test/*
 .idea/

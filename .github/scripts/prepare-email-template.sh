@@ -67,18 +67,54 @@ check_variable() {
     fi
 }
 
-# 检查所有变量
+# 检查关键用户配置变量（必须存在）
 check_variable "TODAY" "$TODAY"
 check_variable "CATEGORIES" "$CATEGORIES"
 check_variable "MODEL_NAME" "$MODEL_NAME"
 check_variable "LANGUAGE" "$LANGUAGE"
 check_variable "REPOSITORY" "$REPOSITORY"
-check_variable "RUN_STARTED_AT" "$RUN_STARTED_AT"
-check_variable "RUN_NUMBER" "$RUN_NUMBER"
-check_variable "RUN_ID" "$RUN_ID"
-check_variable "REF_NAME" "$REF_NAME"
-check_variable "ACTOR" "$ACTOR"
-check_variable "EVENT_NAME" "$EVENT_NAME"
+
+# 为GitHub内置变量设置默认值（防止某些情况下为空）
+if [ -z "$RUN_STARTED_AT" ]; then
+    echo "⚠️ 警告：RUN_STARTED_AT 为空，使用当前时间作为默认值"
+    RUN_STARTED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+fi
+
+if [ -z "$RUN_NUMBER" ]; then
+    echo "⚠️ 警告：RUN_NUMBER 为空，使用默认值"
+    RUN_NUMBER="1"
+fi
+
+if [ -z "$RUN_ID" ]; then
+    echo "⚠️ 警告：RUN_ID 为空，使用默认值"
+    RUN_ID="unknown"
+fi
+
+if [ -z "$REF_NAME" ]; then
+    echo "⚠️ 警告：REF_NAME 为空，使用默认值"
+    REF_NAME="main"
+fi
+
+if [ -z "$ACTOR" ]; then
+    echo "⚠️ 警告：ACTOR 为空，使用默认值"
+    ACTOR="unknown"
+fi
+
+if [ -z "$EVENT_NAME" ]; then
+    echo "⚠️ 警告：EVENT_NAME 为空，使用默认值"
+    EVENT_NAME="unknown"
+fi
+
+# 重新计算TIME_TO_REPLACE（因为可能更新了RUN_STARTED_AT）
+if [[ "$LANGUAGE_LOWER" == *"chinese"* ]] || [[ "$LANGUAGE_LOWER" == *"中文"* ]] || [[ "$LANGUAGE" == "cn" ]]; then
+    # 重新计算北京时间
+    BEIJING_TIME=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')
+    TIME_TO_REPLACE="$BEIJING_TIME"
+else
+    TIME_TO_REPLACE="$RUN_STARTED_AT"
+fi
+
+# 最终检查TIME_TO_REPLACE
 check_variable "TIME_TO_REPLACE" "$TIME_TO_REPLACE"
 
 echo "✅ 所有必要变量检查通过"

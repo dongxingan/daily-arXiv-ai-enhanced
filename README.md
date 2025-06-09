@@ -13,7 +13,7 @@ Otherwise, you can directly use this repo. Please star it if you like :)
 4. Create two repository secrets named `OPENAI_API_KEY` and `OPENAI_BASE_URL`, and input corresponding values.
 5. Go to Variables. Variables are shown as plain text and are used for non-sensitive data
 6. Create the following repository variables:
-   1. `CATEGORIES`: separate the categories with ",", such as "cs.CL, cs.CV"
+   1. `CATEGORIES`: separate the [categories](https://arxiv.org/category_taxonomy) with ",", such as "cs.CL, cs.CV"
    2. `LANGUAGE`: such as "Chinese" or "English"
    3. `MODEL_NAME`: such as "deepseek-chat"
    4. `EMAIL`: your email for push to github
@@ -58,8 +58,26 @@ We recommend using `uv` for a fast and reliable local development setup.
    ```
 4. **Configure environment variables**:
    Create a `.env` file in the root directory and add your `OPENAI_API_KEY`.
+5. **Testing and Debugging Steps**:
+   
+   **Step 5.1: Create detailed .env file**
+   ```bash
+   # Example .env file content
+   OPENAI_API_KEY="sk-your-deepseek-api-key-here"
+   OPENAI_BASE_URL="https://api.deepseek.com"
+   CATEGORIES="cs.CV,cs.AI,cs.CL"
+   LANGUAGE="Chinese"
+   MODEL_NAME="deepseek-chat"
+   ```
 
-For more detailed instructions, please refer to the [**Development Environment Configuration Document**](@Docs/DevEnvConfig.md).
+   **Step 5.2: End-to-End Testing**
+
+   ```bash
+   # Run the complete pipeline
+   bash run.sh
+   ```
+
+> For more detailed instructions, please refer to the [**Development Environment Configuration Document**](@Docs/DevEnvConfig.md).
 
 # 📚 Project Documentation
 

@@ -58,8 +58,26 @@ We recommend using `uv` for a fast and reliable local development setup.
    ```
 4. **Configure environment variables**:
    Create a `.env` file in the root directory and add your `OPENAI_API_KEY`.
+5. **Testing and Debugging Steps**:
+   
+   **Step 5.1: Create detailed .env file**
+   ```bash
+   # Example .env file content
+   OPENAI_API_KEY="sk-your-deepseek-api-key-here"
+   OPENAI_BASE_URL="https://api.deepseek.com"
+   CATEGORIES="cs.CV,cs.AI,cs.CL"
+   LANGUAGE="Chinese"
+   MODEL_NAME="deepseek-chat"
+   ```
 
-For more detailed instructions, please refer to the [**Development Environment Configuration Document**](@Docs/DevEnvConfig.md).
+   **Step 5.2: End-to-End Testing**
+
+   ```bash
+   # Run the complete pipeline
+   bash run.sh
+   ```
+
+> For more detailed instructions, please refer to the [**Development Environment Configuration Document**](@Docs/DevEnvConfig.md).
 
 # 📚 Project Documentation
 

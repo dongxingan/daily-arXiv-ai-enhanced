@@ -85,33 +85,119 @@ jobs:
         subject: "📚 Daily arXiv AI Enhanced - ${{ env.TODAY }}"
         to: ${{ vars.NOTIFICATION_EMAIL }}
         from: ${{ secrets.SMTP_USERNAME }}
-        body: |
-          🎉 今日 arXiv 论文已更新完成！
-          
-          📅 日期: ${{ env.TODAY }}
-          🔗 查看地址: https://github.com/${{ github.repository }}
-          📂 数据文件: https://github.com/${{ github.repository }}/blob/main/data/${{ env.TODAY }}.md
-          
-          📊 本次更新包含以下类别:
-          - ${{ vars.CATEGORIES }}
-          
-          🤖 使用模型: ${{ vars.MODEL_NAME }}
-          🌐 语言: ${{ vars.LANGUAGE }}
-          
-          ---
-          此邮件由 GitHub Actions 自动发送
         html_body: |
-          <h2>📚 Daily arXiv AI Enhanced</h2>
-          <p><strong>📅 日期:</strong> ${{ env.TODAY }}</p>
-          <p><strong>🔗 查看地址:</strong> <a href="https://github.com/${{ github.repository }}">GitHub Repository</a></p>
-          <p><strong>📂 数据文件:</strong> <a href="https://github.com/${{ github.repository }}/blob/main/data/${{ env.TODAY }}.md">今日论文摘要</a></p>
-          
-          <h3>📊 更新信息</h3>
-          <ul>
-            <li><strong>类别:</strong> ${{ vars.CATEGORIES }}</li>
-            <li><strong>模型:</strong> ${{ vars.MODEL_NAME }}</li>
-            <li><strong>语言:</strong> ${{ vars.LANGUAGE }}</li>
-          </ul>
-          
-          <hr>
-          <p><small>此邮件由 GitHub Actions 自动发送</small></p>
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <style>
+              body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; }
+              .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center; }
+              .content { background: #f8f9fa; padding: 20px; border-radius: 0 0 10px 10px; }
+              .info-card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+              .quick-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+              .btn { background: #007bff; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 14px; }
+              .btn:hover { background: #0056b3; }
+              .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 15px 0; }
+              .stat-item { background: white; padding: 10px; border-radius: 5px; text-align: center; border-left: 4px solid #007bff; }
+              .emoji { font-size: 1.2em; }
+              .footer { background: #6c757d; color: white; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 12px; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1><span class="emoji">🚀</span> arXiv AI Enhanced 每日更新</h1>
+              <p style="margin: 5px 0; opacity: 0.9;">智能论文摘要与分析系统</p>
+            </div>
+            
+            <div class="content">
+              <div class="info-card">
+                <h2><span class="emoji">🎉</span> 更新完成通知</h2>
+                <p><strong>📅 更新日期:</strong> ${{ env.TODAY }}</p>
+                <p><strong>⏰ 完成时间:</strong> ${{ github.run_started_at }}</p>
+                <p><strong>🔄 运行编号:</strong> #${{ github.run_number }}</p>
+              </div>
+
+              <div class="info-card">
+                <h3><span class="emoji">⚙️</span> 配置信息</h3>
+                <div class="stats">
+                  <div class="stat-item">
+                    <div style="font-weight: bold; color: #007bff;">研究领域</div>
+                    <div>${{ vars.CATEGORIES }}</div>
+                  </div>
+                  <div class="stat-item">
+                    <div style="font-weight: bold; color: #28a745;">AI 模型</div>
+                    <div>${{ vars.MODEL_NAME }}</div>
+                  </div>
+                  <div class="stat-item">
+                    <div style="font-weight: bold; color: #ffc107;">输出语言</div>
+                    <div>${{ vars.LANGUAGE }}</div>
+                  </div>
+                  <div class="stat-item">
+                    <div style="font-weight: bold; color: #dc3545;">执行状态</div>
+                    <div>✅ 成功</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <h3><span class="emoji">🔗</span> 快速访问</h3>
+                <div class="quick-links">
+                  <a href="https://github.com/${{ github.repository }}" class="btn">📊 GitHub 仓库</a>
+                  <a href="https://github.com/${{ github.repository }}/blob/main/data/${{ env.TODAY }}.md" class="btn">📄 今日论文</a>
+                  <a href="https://github.com/${{ github.repository }}/tree/main/data" class="btn">📁 历史数据</a>
+                  <a href="https://github.com/${{ github.repository }}/actions" class="btn">🔧 工作流状态</a>
+                </div>
+              </div>
+
+              <div class="info-card">
+                <h3><span class="emoji">📈</span> 系统特性</h3>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                  <li><strong>🤖 AI 增强:</strong> 使用 ${{ vars.MODEL_NAME }} 进行智能摘要和分析</li>
+                  <li><strong>🌐 多语言:</strong> 支持 ${{ vars.LANGUAGE }} 输出</li>
+                  <li><strong>⏰ 自动化:</strong> 每个工作日自动更新，跳过节假日</li>
+                  <li><strong>📧 通知:</strong> 实时邮件提醒更新状态</li>
+                  <li><strong>📊 分类:</strong> 专注 ${{ vars.CATEGORIES }} 领域论文</li>
+                </ul>
+              </div>
+
+              <div class="info-card">
+                <h3><span class="emoji">💡</span> 使用提示</h3>
+                <p><strong>🔍 如何查看论文:</strong></p>
+                <ol style="margin: 10px 0; padding-left: 20px;">
+                  <li>点击上方 "今日论文" 按钮查看最新内容</li>
+                  <li>访问 "历史数据" 浏览往期论文摘要</li>
+                  <li>在 GitHub 仓库中可以看到完整的项目信息</li>
+                </ol>
+                
+                <p><strong>⚙️ 自定义配置:</strong></p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                  <li>修改 CATEGORIES 变量调整关注的研究领域</li>
+                  <li>更改 MODEL_NAME 切换不同的 AI 模型</li>
+                  <li>设置 LANGUAGE 变量更改输出语言</li>
+                </ul>
+              </div>
+
+              <div class="info-card">
+                <h3><span class="emoji">📊</span> 工作流信息</h3>
+                <p><strong>🆔 运行 ID:</strong> ${{ github.run_id }}</p>
+                <p><strong>🌿 分支:</strong> ${{ github.ref_name }}</p>
+                <p><strong>💻 触发者:</strong> ${{ github.actor }}</p>
+                <p><strong>🔄 触发方式:</strong> ${{ github.event_name }}</p>
+                <p><strong>🖥️ 运行环境:</strong> Ubuntu Latest</p>
+              </div>
+            </div>
+
+            <div class="footer">
+              <p style="text-align: center; margin: 0;">
+                <strong>🤖 arXiv AI Enhanced 自动化系统</strong><br>
+                📧 此邮件由 GitHub Actions 自动发送 | 
+                ⭐ <a href="https://github.com/${{ github.repository }}" style="color: #ffc107;">为项目点星支持</a> | 
+                🐛 <a href="https://github.com/${{ github.repository }}/issues" style="color: #ffc107;">报告问题</a>
+              </p>
+              <p style="text-align: center; margin: 10px 0 0 0; opacity: 0.8; font-size: 11px;">
+                生成时间: ${{ github.run_started_at }} UTC | 下次更新: 明日工作日 16:30 UTC
+              </p>
+            </div>
+          </body>
+          </html>

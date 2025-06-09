@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; }
+    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center; }
+    .content { background: #f8f9fa; padding: 20px; border-radius: 0 0 10px 10px; }
+    .info-card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+    .btn { background: #007bff; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; display: inline-block; font-size: 14px; }
+    .btn:hover { background: #0056b3; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 15px 0; }
+    .stat-item { background: white; padding: 10px; border-radius: 5px; text-align: center; border-left: 4px solid #007bff; }
+    .emoji { font-size: 1.2em; }
+    .footer { background: #6c757d; color: white; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1><span class="emoji">🚀</span> arXiv AI Enhanced Daily Update</h1>
+    <p style="margin: 5px 0; opacity: 0.9;">Intelligent Paper Summary & Analysis System</p>
+  </div>
+  
+  <div class="content">
+    <div class="info-card">
+      <h2><span class="emoji">🎉</span> Update Completed</h2>
+      <p><strong>📅 Date:</strong> {{TODAY}}</p>
+      <p><strong>⏰ Completed at:</strong> {{RUN_STARTED_AT}}</p>
+      <p><strong>🔄 Run Number:</strong> #{{RUN_NUMBER}}</p>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="emoji">⚙️</span> Configuration</h3>
+      <div class="stats">
+        <div class="stat-item">
+          <div style="font-weight: bold; color: #007bff;">Research Areas</div>
+          <div>{{CATEGORIES}}</div>
+        </div>
+        <div class="stat-item">
+          <div style="font-weight: bold; color: #28a745;">AI Model</div>
+          <div>{{MODEL_NAME}}</div>
+        </div>
+        <div class="stat-item">
+          <div style="font-weight: bold; color: #ffc107;">Language</div>
+          <div>{{LANGUAGE}}</div>
+        </div>
+        <div class="stat-item">
+          <div style="font-weight: bold; color: #dc3545;">Status</div>
+          <div>✅ Success</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="emoji">🔗</span> Quick Access</h3>
+      <div class="quick-links">
+        <a href="https://github.com/{{REPOSITORY}}" class="btn">📊 GitHub Repository</a>
+        <a href="https://github.com/{{REPOSITORY}}/blob/main/data/{{TODAY}}.md" class="btn">📄 Today's Papers</a>
+        <a href="https://github.com/{{REPOSITORY}}/tree/main/data" class="btn">📁 Historical Data</a>
+        <a href="https://github.com/{{REPOSITORY}}/actions" class="btn">🔧 Workflow Status</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="emoji">📈</span> System Features</h3>
+      <ul style="margin: 10px 0; padding-left: 20px;">
+        <li><strong>🤖 AI Enhanced:</strong> Using {{MODEL_NAME}} for intelligent summarization and analysis</li>
+        <li><strong>🌐 Multilingual:</strong> Supporting {{LANGUAGE}} output</li>
+        <li><strong>⏰ Automated:</strong> Daily updates on weekdays</li>
+        <li><strong>📧 Notifications:</strong> Real-time email alerts for updates</li>
+        <li><strong>📊 Categorized:</strong> Focused on {{CATEGORIES}} research areas</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="emoji">💡</span> Usage Tips</h3>
+      <p><strong>🔍 How to view papers:</strong></p>
+      <ol style="margin: 10px 0; padding-left: 20px;">
+        <li>Click "Today's Papers" button above to view latest content</li>
+        <li>Visit "Historical Data" to browse previous paper summaries</li>
+        <li>Check GitHub repository for complete project information</li>
+      </ol>
+      
+      <p><strong>⚙️ Custom Configuration:</strong></p>
+      <ul style="margin: 10px 0; padding-left: 20px;">
+        <li>Modify CATEGORIES variable to adjust research areas of interest</li>
+        <li>Change MODEL_NAME to switch different AI models</li>
+        <li>Set LANGUAGE variable to change output language</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3><span class="emoji">📊</span> Workflow Information</h3>
+      <p><strong>🆔 Run ID:</strong> {{RUN_ID}}</p>
+      <p><strong>🌿 Branch:</strong> {{REF_NAME}}</p>
+      <p><strong>💻 Triggered by:</strong> {{ACTOR}}</p>
+      <p><strong>🔄 Trigger Type:</strong> {{EVENT_NAME}}</p>
+      <p><strong>🖥️ Environment:</strong> Ubuntu Latest</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p style="text-align: center; margin: 0;">
+      <strong>🤖 arXiv AI Enhanced Automation System</strong><br>
+      📧 This email is automatically sent by GitHub Actions | 
+      ⭐ <a href="https://github.com/{{REPOSITORY}}" style="color: #ffc107;">Star this project</a> | 
+      🐛 <a href="https://github.com/{{REPOSITORY}}/issues" style="color: #ffc107;">Report issues</a>
+    </p>
+    <p style="text-align: center; margin: 10px 0 0 0; opacity: 0.8; font-size: 11px;">
+      Generated at: {{RUN_STARTED_AT}} UTC | Next update: Next weekday 16:30 UTC
+    </p>
+  </div>
+</body>
+</html> 

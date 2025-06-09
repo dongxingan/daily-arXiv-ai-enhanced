@@ -61,3 +61,44 @@ jobs:
             fi
           fi
         done
+    - name: Send Email Notification
+      if: success()
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: ${{ secrets.SMTP_SERVER }}
+        server_port: ${{ secrets.SMTP_PORT }}
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: "📚 Daily arXiv AI Enhanced - $(date +'%Y-%m-%d')"
+        to: ${{ vars.NOTIFICATION_EMAIL }}
+        from: ${{ secrets.SMTP_USERNAME }}
+        body: |
+          🎉 今日 arXiv 论文已更新完成！
+          
+          📅 日期: $(date +'%Y-%m-%d')
+          🔗 查看地址: https://github.com/${{ github.repository }}
+          📂 数据文件: https://github.com/${{ github.repository }}/blob/main/data/$(date +'%Y-%m-%d').md
+          
+          📊 本次更新包含以下类别:
+          - ${{ vars.CATEGORIES }}
+          
+          🤖 使用模型: ${{ vars.MODEL_NAME }}
+          🌐 语言: ${{ vars.LANGUAGE }}
+          
+          ---
+          此邮件由 GitHub Actions 自动发送
+        html: |
+          <h2>📚 Daily arXiv AI Enhanced</h2>
+          <p><strong>📅 日期:</strong> $(date +'%Y-%m-%d')</p>
+          <p><strong>🔗 查看地址:</strong> <a href="https://github.com/${{ github.repository }}">GitHub Repository</a></p>
+          <p><strong>📂 数据文件:</strong> <a href="https://github.com/${{ github.repository }}/blob/main/data/$(date +'%Y-%m-%d').md">今日论文摘要</a></p>
+          
+          <h3>📊 更新信息</h3>
+          <ul>
+            <li><strong>类别:</strong> ${{ vars.CATEGORIES }}</li>
+            <li><strong>模型:</strong> ${{ vars.MODEL_NAME }}</li>
+            <li><strong>语言:</strong> ${{ vars.LANGUAGE }}</li>
+          </ul>
+          
+          <hr>
+          <p><small>此邮件由 GitHub Actions 自动发送</small></p>

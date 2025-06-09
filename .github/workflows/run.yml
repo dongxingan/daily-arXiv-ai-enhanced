@@ -70,6 +70,8 @@ jobs:
           echo "✅ Email notification is configured for: ${{ vars.NOTIFICATION_EMAIL }}"
         fi
     - name: Set Date Environment Variable
+      if: success() && vars.NOTIFICATION_EMAIL != ''
+      continue-on-error: true
       run: echo "TODAY=$(date -u '+%Y-%m-%d')" >> $GITHUB_ENV
     - name: Send Email Notification
       if: success() && vars.NOTIFICATION_EMAIL != ''

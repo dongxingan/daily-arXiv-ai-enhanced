@@ -61,10 +61,19 @@ jobs:
             fi
           fi
         done
+    - name: Check Email Configuration
+      run: |
+        if [ -z "${{ vars.NOTIFICATION_EMAIL }}" ]; then
+          echo "⚠️ Email notification is not configured. Skipping email sending."
+          echo "To enable email notifications, please set NOTIFICATION_EMAIL variable and SMTP secrets."
+        else
+          echo "✅ Email notification is configured for: ${{ vars.NOTIFICATION_EMAIL }}"
+        fi
     - name: Set Date Environment Variable
       run: echo "TODAY=$(date -u '+%Y-%m-%d')" >> $GITHUB_ENV
     - name: Send Email Notification
-      if: success()
+      if: success() && vars.NOTIFICATION_EMAIL != ''
+      continue-on-error: true
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: ${{ secrets.SMTP_SERVER }}

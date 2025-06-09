@@ -18,11 +18,21 @@ Otherwise, you can directly use this repo. Please star it if you like :)
    3. `MODEL_NAME`: such as "deepseek-chat"
    4. `EMAIL`: your email for push to github
    5. `NAME`: your name for push to github
-7. Go to your-own-repo -> Actions -> arXiv-daily-ai-enhanced
-8. You can manually click **Run workflow** to test if it works well (it may takes about one hour). 
+7. (Optional) **Enable Email Notifications**: To receive daily email notifications when new papers are processed:
+   1. Add the following repository secrets for email configuration:
+      - `SMTP_SERVER`: SMTP server address (e.g., `smtp.qq.com` for QQ Mail)
+      - `SMTP_PORT`: SMTP port (usually `465` for SSL)
+      - `SMTP_USERNAME`: your sending email address
+      - `SMTP_PASSWORD`: your email password or app-specific password
+   2. Create the following repository variables:
+      - `NOTIFICATION_EMAIL`: your email address for receiving daily update notifications
+   3. For Gmail users: Enable 2-factor authentication and generate an app-specific password
+   4. For QQ Mail users: Enable SMTP service and use the authorization code as password
+8. Go to your-own-repo -> Actions -> arXiv-daily-ai-enhanced
+9. You can manually click **Run workflow** to test if it works well (it may takes about one hour). 
 By default, this action will automatically run every day
 You can modify it in `.github/workflows/run.yml`
-9. If you wish to modify the content in `README.md`, do not directly edit README.md. You should edit `template.md`.
+1.  If you wish to modify the content in `README.md`, do not directly edit README.md. You should edit `template.md`.
 
 ### For Developers (Local Environment)
 

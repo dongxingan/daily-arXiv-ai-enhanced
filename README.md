@@ -94,6 +94,8 @@ This project has a complete set of internal documents, located in the `@Docs` di
 - [ ]  (From `@Docs/TechDebt.md`) Refactor the arXiv spider to use the official API instead of web scraping for better stability.
 
 # Content
+[2025-07-25](data/2025-07-25.md)
+
 [2025-07-24](data/2025-07-24.md)
 
 [2025-07-23](data/2025-07-23.md)
